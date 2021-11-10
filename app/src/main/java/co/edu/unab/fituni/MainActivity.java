@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText estaturaText;
+    private EditText pesoText;
     private Intent irA;
     private static Double imc;
 
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        estaturaText = (EditText) findViewById(R.id.editTextNumber);
+        pesoText = (EditText) findViewById(R.id.editTextNumber2);
         Button botonCalcular = (Button) findViewById(R.id.button2);
 
         botonCalcular.setOnClickListener(new View.OnClickListener() {
@@ -25,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                Intent ir = irA();
                startActivity(ir);
+               estaturaText.setText(""); //limpia el campo estatura
+               pesoText.setText(""); //limpia el campo peso
+               estaturaText.requestFocus(); //posiciona focus del cursor en campo estatura
+
             }
         });
     }
@@ -32,11 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private Intent irA(){
         Double peso=0.0;
         Double estatura=0.0;
-        EditText estaturaText;
-        EditText pesoText;
-
-        estaturaText = (EditText) findViewById(R.id.editTextNumber);
-        pesoText = (EditText) findViewById(R.id.editTextNumber2);
 
         estatura = Double.parseDouble(estaturaText.getText().toString().trim())/100;
         peso = Double.parseDouble(pesoText.getText().toString().trim());
